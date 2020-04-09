@@ -1,6 +1,6 @@
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
-    console.log('Somethin\'');
+    console.log('Hello Azure');
 
     if (req.query.name || (req.body && req.body.name)) {
         context.res = {
