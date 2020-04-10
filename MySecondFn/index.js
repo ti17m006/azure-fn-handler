@@ -5,9 +5,9 @@ module.exports = async function (context, req) {
 
     http.get('someUrl', function (success) {
         if (success) {
-            http.get('someOtherUrl', async function (array) {
+            http.get('someOtherUrl', function (array) {
                 array.forEach(element => {
-                    await element.http.get('someAPI')
+                    element.http.get('someAPI')
                         .then(() => {
                             context.res = {
                                 status: 200,
