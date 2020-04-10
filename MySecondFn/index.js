@@ -23,5 +23,11 @@ module.exports = async function (context, req) {
                 });
             });
         }
+    }).on("error", (error) => {
+        console.log(`Error: ${error.message}`);
+        context.res = {
+            status: 400,
+            body: "An error has occured"
+        };
     });
 };
