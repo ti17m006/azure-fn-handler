@@ -12,7 +12,7 @@ variables:
   azureSubscription: 'b7873852-5d4a-4b81-a7a7-243fb05fd3dc'
 
   # Function app name
-  functionAppName: 'azure-fn-req-handler'
+  functionAppName: 'req-handler'
  
   # Environment name
   environmentName: 'azure-fn-req-handler'
@@ -75,7 +75,7 @@ stages:
         deploy:
           steps:            
           - task: AzureFunctionApp@1
-            displayName: 'Azure Functions App Deploy: azure-fn-req-handler'
+            displayName: 'Azure Functions App Deploy: req-handler'
             inputs:
               azureSubscription: '$(azureSubscription)'
               appType: functionAppLinux
