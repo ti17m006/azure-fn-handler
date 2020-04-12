@@ -1,7 +1,3 @@
-const http = require('http');
-const url = require('url');
-const bodyParser = require('body-parser');
-
 
 const fn_url = "https://req-handler.azurewebsites.net/microsoft/graph/";
 
