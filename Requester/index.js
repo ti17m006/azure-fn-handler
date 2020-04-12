@@ -1,5 +1,7 @@
 const http = require('http');
 const url = require('url');
+const bodyParser = require('body-parser');
+
 
 const fn_url = "https://req-handler.azurewebsites.net/microsoft/graph/";
 
@@ -9,17 +11,18 @@ const dummy_a = fn_url + dummy_a_query_code;
 module.exports = async function (context, req) {
     // context.log('JavaScript HTTP trigger function processed a request.');
 
-    const t = req.get(dummy_a);
+    const t = JSON.stringify({
+        user: {
+            name: "John",
+            email: "john@dummy-a.com"
+        }
+    });
+
     context.res = {
-        body: JSON.stringify({
-            user: {
-                name: "John",
-                email: "john@dummy-a.com"
-            }
-        })
+        body: t.user.email
     };
 
-
+}
 
 
 
