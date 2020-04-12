@@ -9,11 +9,18 @@ const dummy_a = fn_url + dummy_a_query_code;
 module.exports = async function (context, req) {
     // context.log('JavaScript HTTP trigger function processed a request.');
 
-
+    const t = req.get(dummy_a);
     context.res = {
-        body: "t.body"
+        body: t.body
     };
 };
+
+
+
+
+
+
+
 
 // const df = require("durable-functions");
 // const t = yield context.df.callActivity("dummy-a")
