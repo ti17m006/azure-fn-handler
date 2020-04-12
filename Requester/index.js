@@ -8,9 +8,9 @@ const dummy_a = dummy_a_url + dummy_a_query_code;
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
-    http.get(dummy_a, (output) => {
+    http.get(dummy_a, () => {
         context.res = {
-            body: output.url.toString()
+            body: dummy_a
         };
     });
 };
