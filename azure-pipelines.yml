@@ -12,10 +12,10 @@ variables:
   azureSubscription: 'b7873852-5d4a-4b81-a7a7-243fb05fd3dc'
 
   # Function app name
-  functionAppName: 'hello-to-everyone'
+  functionAppName: 'azure-fn-req-handler'
  
   # Environment name
-  environmentName: 'hello-to-everyone'
+  environmentName: 'azure-fn-req-handler'
  
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
