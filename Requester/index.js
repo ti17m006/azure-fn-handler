@@ -7,16 +7,16 @@ const dummy_a = fn_url + dummy_a_query_code;
 module.exports = async function (context, req) {
     // context.log('JavaScript HTTP trigger function processed a request.');
 
-    // const t = JSON.stringify({
-    //     user: {
-    //         name: "John",
-    //         email: "john@dummy-a.com"
-    //     }
-    // });
+    const t = JSON.stringify({
+        user: {
+            name: "John",
+            email: "john@dummy-a.com"
+        }
+    });
 
     context.res = {
 
-        body: "Hello "
+        body: t.user
 
     };
 
