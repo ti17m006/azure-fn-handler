@@ -12,7 +12,7 @@ module.exports = async function (context, req) {
 
     const t = yield context.df.callActivity("dummy-a")
     context.res = {
-        body: t
+        body: t.body
     };
 };
 
