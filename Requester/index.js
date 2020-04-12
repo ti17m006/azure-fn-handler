@@ -1,3 +1,4 @@
+const http = require('http');
 
 const fn_url = "https://req-handler.azurewebsites.net/microsoft/graph/";
 
@@ -7,11 +8,14 @@ const dummy_a = fn_url + dummy_a_query_code;
 module.exports = async function (context, req) {
     // context.log('JavaScript HTTP trigger function processed a request.');
 
-    context.res = {
+    http.get(dummy_a, function (myResponse) {
+        myResponse.on("data", function (value) {
+            context.res = {
+                body: value
+            };
+        })
+    });
 
-        body: dummy_a
-
-    };
 
 }
 
