@@ -11,12 +11,13 @@ module.exports = async function (context, req) {
 
     const t = req.get(dummy_a);
     context.res = {
-        body: t.body
+        body: JSON.stringify({
+            user: {
+                name: "John",
+                email: "john@dummy-a.com"
+            }
+        })
     };
-};
-
-
-
 
 
 
