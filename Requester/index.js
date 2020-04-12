@@ -10,7 +10,7 @@ module.exports = async function (context, req) {
 
     http.get(dummy_a, (output) => {
         context.res = {
-            body: output.url
+            body: output.url.toString()
         };
     });
 };
