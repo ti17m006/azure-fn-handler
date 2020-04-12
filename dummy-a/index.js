@@ -2,7 +2,7 @@ module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
     context.res = {
-        body: "Dummy A" + Date.now.toString()
+        body: "Dummy A " + Date.now()
     }
 
     // if (req.query.name || (req.body && req.body.name)) {
