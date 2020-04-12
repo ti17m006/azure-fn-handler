@@ -19,7 +19,7 @@ module.exports = async function (context, req) {
     });
 
     context.res = {
-        body: dummy_a
+        body: "dummy_a"
     };
 
 }
