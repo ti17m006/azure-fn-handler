@@ -1,18 +1,17 @@
 const http = require('http');
+const url = require('url');
 
 const dummy_a_url = "https://req-handler.azurewebsites.net/microsoft/graph/dummy-a";
 const dummy_a_query_code = "?code=N7u0QKE/VtpqK3RjZjygSzGWk1aWWJWCvZn3t5WMCXHczBDJmWYtKA==";
-
 const dummy_a = dummy_a_url + dummy_a_query_code;
 
 module.exports = async function (context, req) {
-    context.log('JavaScript HTTP trigger function processed a request.');
+    // context.log('JavaScript HTTP trigger function processed a request.');
 
-    http.get(dummy_a, () => {
-        context.res = {
-            body: dummy_a
-        };
-    });
+    const query = dummy_a.query;
+    context.res = {
+        body: query
+    };
 };
 
 /** Draft */
