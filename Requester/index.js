@@ -19,7 +19,7 @@ module.exports = async function (context, req) {
     });
 
     context.res = {
-        body: t.user.email
+        body: dummy_a
     };
 
 }
