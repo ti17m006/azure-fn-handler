@@ -75,7 +75,7 @@ stages:
         deploy:
           steps:            
           - task: AzureFunctionApp@1
-            displayName: 'Azure Functions App Deploy: hello-to-everyone'
+            displayName: 'Azure Functions App Deploy: azure-fn-req-handler'
             inputs:
               azureSubscription: '$(azureSubscription)'
               appType: functionAppLinux
