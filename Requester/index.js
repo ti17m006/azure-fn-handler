@@ -8,20 +8,30 @@ const dummy_a = fn_url + dummy_a_query_code;
 module.exports = async function (context, req) {
     // context.log('JavaScript HTTP trigger function processed a request.');
 
-    http.get(dummy_a, function (output) {
-        context.res = {
-            body: output
-        }
+    var options = {
+        host: 'www.google.com',
+        port: 80,
+        path: '/upload',
+        method: 'POST'
+    };
+
+    req = http.request(options, function (res) {
+        console.log('STATUS: ' + res.statusCode);
+        console.log('HEADERS: ' + JSON.stringify(res.headers));
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            console.log('BODY: ' + chunk);
+        });
     });
 
-    content = JSON.stringify({
-        "name": "requester",
-        "date": Date.now()
-    });
+    req.write('data\n');
+    req.write('data\n');
+    req.end();
 
 
-
-
+    context.res = {
+        body: 'output'
+    };
 }
 
 
