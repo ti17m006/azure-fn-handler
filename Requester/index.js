@@ -8,7 +8,7 @@ const dummy_a = fn_url + dummy_a_query_code;
 
 module.exports = async function (context, req) {
     // context.log('JavaScript HTTP trigger function processed a request.');  
-    let status;
+    let status = "ABC";
     fetch('https://www.google.com/')
         .then((response) => {
             status = "response.status";
