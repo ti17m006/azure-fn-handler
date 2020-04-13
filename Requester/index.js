@@ -12,7 +12,9 @@ module.exports = async function (context, req) {
     fetch('https://req-handler.azurewebsites.net/microsoft/graph/dummy-a?code=N7u0QKE/VtpqK3RjZjygSzGWk1aWWJWCvZn3t5WMCXHczBDJmWYtKA==')
         .then((response) => {
             context.res = {
-                body: response.status
+                body: JSON.stringify({
+                    "status": response.status
+                })
             };
         });
 
