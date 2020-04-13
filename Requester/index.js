@@ -8,15 +8,15 @@ const dummy_a = fn_url + dummy_a_query_code;
 
 module.exports = async function (context, req) {
     // context.log('JavaScript HTTP trigger function processed a request.');  
-    let status = "";
+
     fetch('https://req-handler.azurewebsites.net/microsoft/graph/dummy-a?code=N7u0QKE/VtpqK3RjZjygSzGWk1aWWJWCvZn3t5WMCXHczBDJmWYtKA==')
         .then((response) => {
-            status = response.status;
+            context.res = {
+                body: response.status
+            };
         });
 
-    context.res = {
-        body: status
-    };
+
 }
 
 
