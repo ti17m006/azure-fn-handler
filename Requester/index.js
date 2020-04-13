@@ -8,20 +8,15 @@ const dummy_a = fn_url + dummy_a_query_code;
 
 module.exports = async function (context, req) {
     // context.log('JavaScript HTTP trigger function processed a request.');  
+    let status;
+    fetch('https://www.google.com/')
+        .then((response) => {
+            status = response.status;
 
-    fetch(dummy_a)
-        .then(function (data) {
-            context.res = {
-                body: "my_data"
-            };
-        })
-        .catch(function (error) {
-            context.res = {
-                body: "my_data"
-            };
         });
-
-
+    context.res = {
+        body: status
+    };
 }
 
 
