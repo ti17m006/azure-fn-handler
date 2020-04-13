@@ -20,12 +20,13 @@ module.exports = async function (context, req) {
         });
         response.on("end", function () {
             my_data = JSON.parse(body);
-            context.res = {
-                body: "my_data"
-            };
+
         });
     });
 
+    context.res = {
+        body: "my_data"
+    };
 
 }
 
