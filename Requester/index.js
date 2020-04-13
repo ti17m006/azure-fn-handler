@@ -8,13 +8,14 @@ const dummy_a = fn_url + dummy_a_query_code;
 module.exports = async function (context, req) {
     // context.log('JavaScript HTTP trigger function processed a request.');
 
-    http.get(dummy_a, function (myResponse) {
-        myResponse.on("data", function (value) {
-            context.res = {
-                body: value
-            };
-        })
+    content = JSON.stringify({
+        "name": "requester",
+        "date": Date.now()
     });
+
+    context.res = {
+        body: content
+    }
 
 
 }
