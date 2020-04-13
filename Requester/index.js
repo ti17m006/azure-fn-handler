@@ -1,14 +1,15 @@
-const http = require('http');
 
-const fn_url = "https://req-handler.azurewebsites.net/microsoft/graph/";
-
-const dummy_a_query_code = "dummy-a?code=N7u0QKE/VtpqK3RjZjygSzGWk1aWWJWCvZn3t5WMCXHczBDJmWYtKA==";
-const dummy_a = fn_url + dummy_a_query_code;
 
 
 
 module.exports = async function (context, req) {
     // context.log('JavaScript HTTP trigger function processed a request.');
+    const http = require('http');
+
+    const fn_url = "https://req-handler.azurewebsites.net/microsoft/graph/";
+
+    const dummy_a_query_code = "dummy-a?code=N7u0QKE/VtpqK3RjZjygSzGWk1aWWJWCvZn3t5WMCXHczBDJmWYtKA==";
+    const dummy_a = fn_url + dummy_a_query_code;
 
     let my_data = "";
 
@@ -20,6 +21,9 @@ module.exports = async function (context, req) {
         });
         response.on("end", function () {
             my_data = JSON.parse(body);
+
+        });
+        response.on('error', function (error) {
 
         });
     });
