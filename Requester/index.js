@@ -1,24 +1,48 @@
 
 const http = require('http');
-const fetch = require('node-fetch');
 
-const fn_url = "https://req-handler.azurewebsites.net/microsoft/graph/";
-const dummy_a_query_code = "dummy-a?code=N7u0QKE/VtpqK3RjZjygSzGWk1aWWJWCvZn3t5WMCXHczBDJmWYtKA==";
-const dummy_a = fn_url + dummy_a_query_code;
+const fn_url = 'https://req-handler.azurewebsites.net';
+const fn_path = '/microsoft/graph/dummy-a'
+const dummy_a_query_code = "?code=N7u0QKE/VtpqK3RjZjygSzGWk1aWWJWCvZn3t5WMCXHczBDJmWYtKA==";
+
+const options = {
+    host: fn_url,
+    port: 80,
+    path: `${fn_path}${dummy_a_query_code}`,
+    method: 'GET'
+}
+
+function getData(options, callback) {
+    http.request(options, function (respond) {
+        let body = '';
+        respond.on('data', function (chunk) {
+            body += chunk;
+        })
+        respond.on('end', function () {
+            callback(null, JSON.parse(body))
+        })
+        respond.on('error', callback);
+
+    })
+        .on('error', callback)
+        .end();
+}
 
 module.exports = async function (context, req) {
     // context.log('JavaScript HTTP trigger function processed a request.');  
 
-    fetch('https://req-handler.azurewebsites.net/microsoft/graph/dummy-a?code=N7u0QKE/VtpqK3RjZjygSzGWk1aWWJWCvZn3t5WMCXHczBDJmWYtKA==')
-        .then((response) => {
+    getData(options, function (error, result) {
+        if (error) {
             context.res = {
-                body: JSON.stringify({
-                    "status": response.status
-                })
-            };
-        });
-
-
+                status: 400,
+                body: error
+            }
+        }
+        context.res = {
+            status: 200,
+            body: result
+        }
+    });
 }
 
 
