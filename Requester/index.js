@@ -5,19 +5,29 @@ const fn_url = "https://req-handler.azurewebsites.net/microsoft/graph/";
 const dummy_a_query_code = "dummy-a?code=N7u0QKE/VtpqK3RjZjygSzGWk1aWWJWCvZn3t5WMCXHczBDJmWYtKA==";
 const dummy_a = fn_url + dummy_a_query_code;
 
-module.exports = async function (context, req) {
-    // context.log('JavaScript HTTP trigger function processed a request.');
+const df = require("durable-functions");
 
-    let my_data;
+module.exports = df.orchestrator(function* (context) {
+    try {
+        return yield context.df.callActivity("dummy-a");
+    } catch (error) {
+        // Error handling or compensation goes here.
+    }
+});
 
-    req = http.request(dummy_a, function (data) {
-        my_data = data.url;
-    });
+// module.exports = async function (context, req) {
+//     // context.log('JavaScript HTTP trigger function processed a request.');
 
-    context.res = {
-        body: my_data
-    };
-}
+//     let my_data;
+
+//     req = http.request(dummy_a, function (data) {
+//         my_data = data.url;
+//     });
+
+//     context.res = {
+//         body: my_data
+//     };
+// }
 
 
 
