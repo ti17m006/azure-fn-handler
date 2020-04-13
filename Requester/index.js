@@ -11,9 +11,9 @@ module.exports = async function (context, req) {
     let status;
     fetch('https://www.google.com/')
         .then((response) => {
-            status = response.status;
-
+            status = "response.status";
         });
+
     context.res = {
         body: status
     };
