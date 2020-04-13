@@ -43,6 +43,10 @@ module.exports = async function (context, req) {
             body: 'result'
         }
     });
+    context.res = {
+        status: 200,
+        body: 'result'
+    }
 }
 
 
