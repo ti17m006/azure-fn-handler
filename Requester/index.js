@@ -1,37 +1,57 @@
 
 const http = require('http');
 
-const fn_url = 'https://req-handler.azurewebsites.net';
-const fn_path = '/microsoft/graph/dummy-a'
-const dummy_a_query_code = "?code=N7u0QKE/VtpqK3RjZjygSzGWk1aWWJWCvZn3t5WMCXHczBDJmWYtKA==";
+// const fn_url = 'https://req-handler.azurewebsites.net';
+const fn_url = 'http://localhost:3000';
+const fn_path = '/microsoft/graph/dummy-a';
+const my_url = `${fn_url}${fn_path}`
 
-const options = {
-    host: fn_url,
-    port: 80,
-    path: `${fn_path}${dummy_a_query_code}`,
-    method: 'GET'
-}
+function getData(url, callback) {
+    console.log('\n Function ->  getData', url);
+    // https://nodejs.org/api/http.html#http_http_get_options_callback
+    http.get(url, (response) => {
+        console.log('\n Function ->  http.get');
+        const { statusCode } = response;
+        const contentType = response.headers['content-type'];
 
-function getData(options, callback) {
-    http.request(options, function (respond) {
-        let body = '';
-        respond.on('data', function (chunk) {
-            body += chunk;
-        })
-        respond.on('end', function () {
-            callback(null, JSON.parse(body))
-        })
-        respond.on('error', callback);
+        let error;
+        if (statusCode !== 200) {
+            error = new Error('Request Failed.\n' +
+                `Status Code: ${statusCode}`);
+        }
+        // } else if (!/^application\/json/.test(contentType)) {
+        //     error = new Error('Invalid content-type.\n' +
+        //         `Expected application/json but received ${contentType}`);
+        // }
+        if (error) {
+            console.error(error.message);
+            // Consume response data to free up memory
+            response.resume();
+            return;
+        }
 
-    })
-        .on('error', callback)
-        .end();
+        console.log('raw data');
+        response.setEncoding('utf8');
+        let rawData = '';
+        response.on('data', (chunk) => { rawData += chunk; });
+        response.on('end', () => {
+            try {
+                // const parsedData = JSON.parse(rawData);
+                console.log(rawData);
+                callback(rawData);
+            } catch (e) {
+                console.error(e.message);
+            }
+        });
+    }).on('error', (e) => {
+        console.error(`Got error: ${e.message}`);
+    });
 }
 
 module.exports = async function (context, req) {
-    // context.log('JavaScript HTTP trigger function processed a request.');  
+    context.log('JavaScript HTTP trigger function processed a request.');
 
-    getData(options, function (error, result) {
+    getData(my_url, function (error, result) {
         if (error) {
             context.res = {
                 status: 400,
@@ -40,13 +60,9 @@ module.exports = async function (context, req) {
         }
         context.res = {
             status: 200,
-            body: 'result'
+            body: result
         }
     });
-    context.res = {
-        status: 200,
-        body: options.host
-    }
 }
 
 
@@ -83,4 +99,22 @@ http.get('someUrl', function (success) {
         body: "An error has occured"
     };
 });
+ */
+
+/**
+ * http.request(options, function (respond) {
+       console.log('\n http.request -> getData', respond)
+       callback(null, JSON.parse(body))
+       let body = '';
+       respond.on('data', function (chunk) {
+           body += chunk;
+       })
+       respond.on('end', function () {
+
+       })
+       respond.on('error', callback);
+
+   })
+       .on('error', callback)
+       .end();
  */

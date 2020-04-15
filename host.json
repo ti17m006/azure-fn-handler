@@ -6,7 +6,7 @@
   },
   "extensions": {
     "http": {
-      "routePrefix": "/microsoft/graph"
+      "routePrefix": "microsoft/graph"
     }
   }
 }

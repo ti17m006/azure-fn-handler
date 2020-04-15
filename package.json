@@ -1,13 +1,23 @@
 {
-  "name": "pay-per-execution",
+  "name": "req-handler",
   "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "start": "func start",
-    "test": "echo \"No tests yet...\""
-  },
+  "description": "Azure Functions",
+  "main": "server.js",
   "dependencies": {
-    "node-fetch": "2.6.0"
+    "azure-functions-core-tools": "^2.7.2254"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ti17m006/req-handler.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ti17m006/req-handler/issues"
+  },
+  "homepage": "https://github.com/ti17m006/req-handler#readme"
 }
