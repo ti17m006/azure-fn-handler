@@ -8,7 +8,7 @@ const fn_url = `${localhost}${fn_path}`;
 
 const dummy_a = 'dummy-a';
 const dummy_b = 'dummy-b';
-const dummy_c = 'dummy_c';
+const dummy_c = 'dummy-c';
 
 
 const callUrl = function (url) {
