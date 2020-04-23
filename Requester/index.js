@@ -2,11 +2,31 @@
 const http = require('http');
 
 // const fn_url = 'https://req-handler.azurewebsites.net';
-const fn_url = 'http://localhost:3000';
-const fn_path = '/microsoft/graph/dummy-a';
-const my_url = `${fn_url}${fn_path}`
+const localhost = 'http://localhost:3000';
+const fn_path = '/microsoft/graph/';
+const fn_url = `${localhost}${fn_path}`;
 
-function getData(url, callback) {
+const dummy_a = 'dummy-a';
+const dummy_b = 'dummy-b';
+const dummy_c = 'dummy_c';
+
+
+const callUrl = function (url) {
+    return new Promise((resolve, reject) => {
+        http.get(url, (response) => {
+
+        });
+    });
+}
+
+module.exports = async function (context, req) {
+    context.log('JavaScript HTTP trigger function processed a request.');
+
+
+}
+
+/**
+ * function getData(url, callback) {
     console.log('\n Function ->  getData', url);
     // https://nodejs.org/api/http.html#http_http_get_options_callback
     http.get(url, (response) => {
@@ -47,24 +67,7 @@ function getData(url, callback) {
         console.error(`Got error: ${e.message}`);
     });
 }
-
-module.exports = async function (context, req) {
-    context.log('JavaScript HTTP trigger function processed a request.');
-
-    getData(my_url, function (error, result) {
-        if (error) {
-            context.res = {
-                status: 400,
-                body: error
-            }
-        }
-        context.res = {
-            status: 200,
-            body: result
-        }
-    });
-}
-
+ */
 
 
 // const df = require("durable-functions");
@@ -117,4 +120,9 @@ http.get('someUrl', function (success) {
    })
        .on('error', callback)
        .end();
+ */
+
+/**
+ *
+ *
  */
