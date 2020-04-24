@@ -42,7 +42,7 @@ module.exports = async function (context, req) {
             console.log(`   -> my_promise ${local_url} `);
             console.log(`   -> my_data ${data} `);
             context.res = {
-                body: 'dfsdfdsfsdf'
+                body: data
             }
         })
         .catch((error) => {
