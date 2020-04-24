@@ -4,7 +4,7 @@ const http = require('http');
 // const fn_url = 'https://req-handler.azurewebsites.net';
 const localhost = 'http://localhost:3000';
 const fn_path = '/microsoft/graph/';
-const fn_url = `${localhost}${fn_path}`;
+const fn_url = localhost + fn_path;
 
 const dummy_a = 'dummy-a';
 const dummy_b = 'dummy-b';
@@ -12,6 +12,9 @@ const dummy_c = 'dummy-c';
 
 
 const callUrl = function (url) {
+
+    console.log(` callUrl -> ${url} `);
+
     return new Promise((resolve, reject) => {
         http.get(url, (response) => {
             // check response.statusCode [200; 299]
@@ -20,9 +23,7 @@ const callUrl = function (url) {
                 buffer.push(chunk);
             });
             response.on('end', () => {
-                buffer.push({
-                    body: 'end'
-                });
+                resolve(buffer.push({}));
             });
             response.on('error', (error) => {
                 reject(error);
@@ -33,11 +34,13 @@ const callUrl = function (url) {
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
-
-    callUrl(`${fn_url}${dummy_a}`)
+    local_url = fn_url + dummy_a;
+    console.log(`   -> local_url ${local_url}`);
+    callUrl(local_url)
         .then((data) => {
+            console.log(` -> my_promise ${local_url} `);
             context.res = {
-                body: data
+                body: 'data'
             }
             console.log(`${data}`)
         })
