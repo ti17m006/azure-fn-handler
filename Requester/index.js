@@ -18,12 +18,12 @@ const callUrl = function (url) {
     return new Promise((resolve, reject) => {
         http.get(url, (response) => {
             // check response.statusCode [200; 299]
-            let buffer = [];
+            let buffer = '';
             response.on('data', (chunk) => {
-                buffer.push(chunk);
+                buffer += chunk
             });
             response.on('end', () => {
-                resolve(buffer.push({}));
+                resolve(buffer);
             });
             response.on('error', (error) => {
                 reject(error);
@@ -34,18 +34,23 @@ const callUrl = function (url) {
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
+
     local_url = fn_url + dummy_a;
     console.log(`   -> local_url ${local_url}`);
     callUrl(local_url)
         .then((data) => {
-            console.log(` -> my_promise ${local_url} `);
+            console.log(`   -> my_promise ${local_url} `);
+            console.log(`   -> my_data ${data} `);
             context.res = {
-                body: 'data'
+                body: 'dfsdfdsfsdf'
             }
-            console.log(`${data}`)
         })
         .catch((error) => {
-            console.error(`${error}\n`)
+            console.error(`${error}\n`);
+            context.res = {
+                status: 404,
+                body: 'error'
+            }
         });
 }
 
