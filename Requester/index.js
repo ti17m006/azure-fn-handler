@@ -14,6 +14,7 @@ const dummy_c = 'dummy-c';
 const callUrl = function (url) {
     return new Promise((resolve, reject) => {
         http.get(url, (response) => {
+            // check response.statusCode [200; 299]
 
         });
     });
