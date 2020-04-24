@@ -15,7 +15,18 @@ const callUrl = function (url) {
     return new Promise((resolve, reject) => {
         http.get(url, (response) => {
             // check response.statusCode [200; 299]
-
+            let buffer = [];
+            response.on('data', (chunk) => {
+                buffer.push(chunk);
+            });
+            response.on('end', () => {
+                buffer.push({
+                    body: 'end'
+                });
+            });
+            response.on('error', (error) => {
+                reject(error);
+            });
         });
     });
 }
@@ -23,7 +34,16 @@ const callUrl = function (url) {
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
-
+    callUrl(`${fn_url}${dummy_a}`)
+        .then((data) => {
+            context.res = {
+                body: data
+            }
+            console.log(`${data}`)
+        })
+        .catch((error) => {
+            console.error(`${error}\n`)
+        });
 }
 
 /**
