@@ -1,14 +1,16 @@
 {
   "bindings": [
     {
-      "route": "v1/requester/dummy-a",
+      "route": "v1/user/{id?}/{method?}",
       "authLevel": "function",
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
       "methods": [
+        "post",
         "get",
-        "post"
+        "patch",
+        "delete"
       ]
     },
     {
