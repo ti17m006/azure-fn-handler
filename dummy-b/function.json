@@ -1,6 +1,7 @@
 {
   "bindings": [
     {
+      "route": "v1/requester/dummy-b",
       "authLevel": "function",
       "type": "httpTrigger",
       "direction": "in",

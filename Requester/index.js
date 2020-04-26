@@ -1,9 +1,11 @@
 
+// curl --location --request GET 'http://localhost:3000/azureFunctionPlayground/api/v1/requester'
+
 const http = require('http');
 
 // const fn_url = 'https://req-handler.azurewebsites.net';
 const localhost = 'http://localhost:3000';
-const fn_path = '/microsoft/graph/';
+const fn_path = '/azureFunctionPlayground/api/v1/requester/';
 const fn_url = localhost + fn_path;
 
 const dummy_a = 'dummy-a';
