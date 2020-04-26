@@ -40,21 +40,30 @@ module.exports = async function (context, req) {
 
     local_url = fn_url + dummy_a;
     //console.log(`   -> local_url ${local_url}`);
-    callUrl(local_url)
-        .then((data) => {
-            //console.log(`   -> my_promise ${local_url} `);
-            //console.log(`   -> my_data ${data} `);
-            context.res = {
-                body: data
-            }
-        })
-        .catch((error) => {
-            console.error(`${error}\n`);
-            context.res = {
-                status: 404,
-                body: 'error'
-            }
-        });
+    let data = await callUrl(local_url);
+    //.then((data) => {
+    //console.log(`   -> my_promise ${local_url} `);
+    //console.log(`   -> my_data ${data} `);
+    //     context.res = {
+    //         httpResponse: {
+    //             body: data
+    //         },
+
+    //     }
+
+
+    // })
+    // .catch((error) => {
+    //     console.error(`${error}\n`);
+    //     context.res = {
+    //         status: 404,
+    //         body: 'error'
+    //     }
+    // });
+    console.log(`   -> my_data ${data} `);
+    context.res = {
+        body: data
+    }
 }
 
 /**
