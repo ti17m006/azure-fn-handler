@@ -45,13 +45,13 @@ const callUrl = function (url) {
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
-    // let local_data = [];
+    //let local_data = [];
     // local_url.forEach(async element => {
-    //     local_data.push(callUrl(element));
+    // local_data.push(callUrl(element));
     // });
-    // local_data.forEach(async element => {
-    //     console.log(await element);
-    // });
+    local_url.forEach(async element => {
+        console.log(await callUrl(element));
+    });
 
     // local_url.forEach(async element => {
     //     callUrl(element)
@@ -61,13 +61,16 @@ module.exports = async function (context, req) {
     //         })
     // });
 
-    local_url.forEach(async element => {
-        global_data.push(await callUrl(element));
-    });
-    // let data = await callUrl(local_url);
+    // local_url.forEach(async element => {
+    //     global_data.push(await callUrl(element));
+    // });
+    const data_a = await callUrl(local_url[0]);
+    const data_b = await callUrl(local_url[1]);
+    const data_c = await callUrl(local_url[2]);
+
     context.res = {
-        body: global_data
-    }
+        body: `${data_a},${data_b},${data_c}`
+    };
 
     //callUrl(local_url)
     //.then((data) => {
