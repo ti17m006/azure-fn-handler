@@ -41,15 +41,13 @@ module.exports = async function (context, req) {
     local_url = fn_url + dummy_a;
     //console.log(`   -> local_url ${local_url}`);
     let data = await callUrl(local_url);
-    //.then((data) => {
-    //console.log(`   -> my_promise ${local_url} `);
-    //console.log(`   -> my_data ${data} `);
-    //     context.res = {
-    //         httpResponse: {
-    //             body: data
-    //         },
-
-    //     }
+    context.res = {
+        body: data
+    }
+    //callUrl(local_url).then((data) => {
+    // context.res = {
+    //     body: data
+    // }
 
 
     // })
@@ -60,10 +58,7 @@ module.exports = async function (context, req) {
     //         body: 'error'
     //     }
     // });
-    console.log(`   -> my_data ${data} `);
-    context.res = {
-        body: data
-    }
+
 }
 
 /**
