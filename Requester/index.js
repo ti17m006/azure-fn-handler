@@ -19,7 +19,7 @@ const callUrl = function (url) {
         http.get(url, (response) => {
             // check response.statusCode [200; 299]
             if (response.statusCode < 200 && response.statusCode < 300) {
-                reject(response.statusCode);
+                reject(new Error(`Status code: ${response.statusCode}`));
             }
             let buffer = '';
             response.on('data', (chunk) => {
@@ -39,11 +39,11 @@ module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
     local_url = fn_url + dummy_a;
-    console.log(`   -> local_url ${local_url}`);
+    //console.log(`   -> local_url ${local_url}`);
     callUrl(local_url)
         .then((data) => {
-            console.log(`   -> my_promise ${local_url} `);
-            console.log(`   -> my_data ${data} `);
+            //console.log(`   -> my_promise ${local_url} `);
+            //console.log(`   -> my_data ${data} `);
             context.res = {
                 body: data
             }
