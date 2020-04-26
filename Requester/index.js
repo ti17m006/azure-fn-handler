@@ -10,6 +10,13 @@ const dummy_a = 'dummy-a';
 const dummy_b = 'dummy-b';
 const dummy_c = 'dummy-c';
 
+local_url = [];
+local_url.push(`${fn_url}${dummy_a}`);
+local_url.push(`${fn_url}${dummy_b}`);
+local_url.push(`${fn_url}${dummy_c}`);
+
+
+let global_data = [];
 
 const callUrl = function (url) {
 
@@ -38,18 +45,35 @@ const callUrl = function (url) {
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
-    local_url = fn_url + dummy_a;
-    //console.log(`   -> local_url ${local_url}`);
-    let data = await callUrl(local_url);
+    // let local_data = [];
+    // local_url.forEach(async element => {
+    //     local_data.push(callUrl(element));
+    // });
+    // local_data.forEach(async element => {
+    //     console.log(await element);
+    // });
+
+    // local_url.forEach(async element => {
+    //     callUrl(element)
+    //         .then(async t => {
+    //             local_data.push(t);
+    //             console.log(t);
+    //         })
+    // });
+
+    local_url.forEach(async element => {
+        global_data.push(await callUrl(element));
+    });
+    // let data = await callUrl(local_url);
     context.res = {
-        body: data
+        body: global_data
     }
-    //callUrl(local_url).then((data) => {
+
+    //callUrl(local_url)
+    //.then((data) => {
     // context.res = {
     //     body: data
     // }
-
-
     // })
     // .catch((error) => {
     //     console.error(`${error}\n`);
