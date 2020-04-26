@@ -18,6 +18,9 @@ const callUrl = function (url) {
     return new Promise((resolve, reject) => {
         http.get(url, (response) => {
             // check response.statusCode [200; 299]
+            if (response.statusCode < 200 && response.statusCode < 300) {
+                reject(response.statusCode);
+            }
             let buffer = '';
             response.on('data', (chunk) => {
                 buffer += chunk
