@@ -6,7 +6,9 @@
   "dependencies": {
     "azure-functions-core-tools": "^2.7.2254"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^25.4.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
