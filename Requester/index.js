@@ -1,4 +1,4 @@
-
+console.log('Requester - Index');
 // curl --location --request GET 'http://localhost:3000/azureFunctionPlayground/api/v1/requester'
 
 const http = require('http');
@@ -42,10 +42,61 @@ const callUrl = function (url) {
     });
 }
 
+const collectData = async function () {
+    all_data = [];
+    callUrl(local_url[0])
+        .then((data_a) => {
+            console.log(data_a);
+            // all_data.push(data_a);
+            // console.log(all_data[0]);
+            callUrl(local_url[1])
+                .then((data_b) => {
+                    console.log(data_b);
+                    // all_data.push(data_b);
+                    // console.log(all_data[1]);
+                    callUrl(local_url[2])
+                        .then((data_c) => {
+                            console.log(data_c);
+                            all_data.push(data_a);
+                            all_data.push(data_b);
+                            all_data.push(data_c);
+                            console.log(all_data);
+                        })
+                        .catch((error) => {
+                            console.error(`An error has ocurred ${error}`);
+                            all_data.push(error);
+                        });
+                })
+                .catch((error) => {
+                    console.error(`An error has ocurred ${error}`);
+                    all_data.push(error);
+                });
+        })
+        .catch((error) => {
+            console.error(`An error has ocurred ${error}`);
+            all_data.push(error);
+        });
+
+    return new Promise((resolve, reject) => {
+        try {
+            console.log(`all_data -> ${all_data}`);
+            resolve(all_data);
+        } catch (exception) {
+            reject(exception);
+        }
+
+    });
+}
+
+
 
 module.exports = async function (context, req) {
+
+    console.log('Main function');
+
     context.res = {
-        body: 'Main'
+        status: 200,
+        body: collectData()
     };
 }
 
