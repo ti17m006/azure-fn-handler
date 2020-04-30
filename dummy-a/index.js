@@ -2,10 +2,12 @@ module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
 
     content = JSON.stringify({
-        "name": "Dummy A "
+        "name": "Dummy A ",
+        "date": Date.now()
     });
 
     context.res = {
+        status: 200,
         body: content
     }
 

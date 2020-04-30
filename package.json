@@ -10,6 +10,7 @@
     "jest": "^25.4.0"
   },
   "scripts": {
+    "start": "func start --port 3000",
     "test": "jest"
   },
   "repository": {
